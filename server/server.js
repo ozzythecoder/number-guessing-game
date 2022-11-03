@@ -39,7 +39,7 @@ app.post('/guesses', (req, res) => {
   } else if (guessObj.augustGuess < theNumber) {
     guessObj.augustHiLo = 'Low'
   } else if (guessObj.augustGuess == theNumber) {
-    guessObj.augustHiLo = 'Winner!'
+    guessObj.augustHiLo = 'Correct'
   }
 
   if (guessObj.jaredGuess > theNumber) {
@@ -47,7 +47,7 @@ app.post('/guesses', (req, res) => {
   } else if (guessObj.jaredGuess < theNumber) {
     guessObj.jaredHiLo = 'Low'
   } else if (guessObj.jaredGuess == theNumber) {
-    guessObj.jaredHiLo = 'Winner!'
+    guessObj.jaredHiLo = 'Correct'
   }
 
   guessArray.push(guessObj);

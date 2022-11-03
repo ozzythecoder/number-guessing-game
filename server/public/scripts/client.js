@@ -27,6 +27,14 @@ function render() {
           <td>Jared</td>
         </tr>
       `) // end append
+
+      if (guesses.augustHiLo == 'Correct') {
+        getWinState('August');
+        break;
+      } else if (guesses.jaredHiLo == 'Correct') {
+        getWinState('Jared');
+        break;
+      }
     } // end for loop
 
     console.log('we got it!', response);
@@ -48,8 +56,30 @@ function storeGuess() {
     }
   }).then( (res) => {
     console.log('success!');
+    render();
   }).catch( (err) => {
     console.log('whyyyyy 😭');
   }) // end ajax
 
 }
+
+function getWinState() {
+  //announce the winner
+  $('#guess-output').empty();
+
+  //append 'play again?' button (send to server)
+  //(new get function to the server)
+  $('#win-message').append(`
+    <button id="play-again">Play Again??</button>
+  
+  `)
+  
+  
+
+}
+
+//clear the table data/DOM
+//wipe previous guesses(empty contents of guessArray), 
+//generate new theNumber
+//invoke the render function
+//resetGame function
