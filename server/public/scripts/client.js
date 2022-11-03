@@ -2,6 +2,8 @@ $(document).ready(handleReady);
 
 function handleReady() {
   console.log("jquery is loaded!")
+  $('#start-game').on('click', gameInit);
+
   $('#submit-btn').on('click', storeGuess);
 
   // need to target element that exists on page load:
@@ -10,7 +12,21 @@ function handleReady() {
   render();
 }
 
+function gameInit() {
+  console.log('in gameinit');
+  $.ajax({
+    method: 'POST',
+    url: '/gameinit',
+    data: {
+      min: $('#min-value').val(),
+      max: $('#max-value').val()
+    }
+  }).then( (res) => {
+    render();
+  }).catch( (err) => {
 
+  })
+}
 
 function render() {
   console.log('in render()');
@@ -128,6 +144,7 @@ function getTieState() {
 }
 
 function resetGame() {
+
   $.ajax({
     method: 'POST',
     url: '/reset',
@@ -138,4 +155,5 @@ function resetGame() {
   }).catch( (err) => {
     alert('epic fail 😈');
   })
+
 }

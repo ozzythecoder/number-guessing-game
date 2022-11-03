@@ -17,7 +17,7 @@ app.use(express.static('server/public'));
 
 // Game set-up
 let guessArray = []; // will hold all previous guesses
-let theNumber = getRandomInteger(1, 25); // gets a random number from 1 to 25
+let theNumber;
 console.log('the number is', theNumber)
 
 // First get request:
