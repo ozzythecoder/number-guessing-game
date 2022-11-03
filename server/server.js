@@ -17,6 +17,7 @@ function getRandomInteger(min, max) {
 // Game set-up
 let guessArray = []; // will hold all previous guesses
 let theNumber = getRandomInteger(1, 25); // gets a random number from 1 to 25
+console.log('the number is', theNumber)
 
 // First get request:
 app.get('/guesses', (req, res) => {

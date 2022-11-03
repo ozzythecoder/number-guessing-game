@@ -37,13 +37,13 @@ function render() {
       `) // end append
 
       // during each loop, read if there was a correct guess:
-      if (guesses.augustHiLo == 'Correct') {
-        getWinState('August'); // if there was, run the winning function
-        break; // and then immediately exit the for loop
-      } else if (guesses.jaredHiLo == 'Correct') {
-        getWinState('Jared');
-        break;
-      }
+      // if (guesses.augustHiLo == 'Correct') {
+      //   getWinState('August'); // if there was, run the winning function
+      //   break; // and then immediately exit the for loop
+      // } else if (guesses.jaredHiLo == 'Correct') {
+      //   getWinState('Jared');
+      //   break;
+      // }
     } // end for loop
 
   }).catch( (err) => {
@@ -66,11 +66,30 @@ function storeGuess() {
     console.log('success!');
 
     emptyInputs(); // empty the guess inputs
+    checkForWin();
     render(); // re-render DOM with latest guess in the array
   }).catch( (err) => {
     console.log('whyyyyy 😭');
   }) // end ajax
 
+}
+
+function checkForWin() {
+  $.ajax({
+    method: 'GET',
+    url: '/guesses'
+  }).then( (response) => {
+    let lastGuess = response[response.length - 1];
+
+    if (lastGuess.augustHiLo == 'Correct') {
+      getWinState('August'); // if there was, run the winning function
+    } else if (lastGuess.jaredHiLo == 'Correct') {
+      getWinState('Jared');
+    } // end else if
+    
+  }).catch((err) => {
+    console.log('argh');
+  })
 }
 
 function emptyInputs() {
