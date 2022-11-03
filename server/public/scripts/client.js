@@ -80,8 +80,10 @@ function getWinState(winner) {
   //append 'play again?' button (send to server)
   //(new get function to the server)
   $('#win-message').append(`
-    <h1>Congratulations, ${winner}!!</h1>
-    <button id="play-again">Play Again??</button>
+    <div id="you-won">
+      <h1>Congratulations, ${winner}!!</h1>
+      <button id="play-again">Play Again??</button>
+    </div>
   `)
 }
 
