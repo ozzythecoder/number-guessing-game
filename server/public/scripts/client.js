@@ -6,6 +6,8 @@ function handleReady() {
   render();
 }
 
+
+
 function render() {
   console.log('in render()');
   $.ajax({
@@ -15,6 +17,7 @@ function render() {
     $('#guess-output').empty();
 
     for (let guesses of response) {
+
       $('#guess-output').append(`
         <tr>
           <td>${guesses.augustGuess}</td>
@@ -56,11 +59,17 @@ function storeGuess() {
     }
   }).then( (res) => {
     console.log('success!');
+    emptyInputs();
     render();
   }).catch( (err) => {
     console.log('whyyyyy 😭');
   }) // end ajax
 
+}
+
+function emptyInputs() {
+  $('#august-guess').val('');
+  $('#jared-guess').val('');
 }
 
 function getWinState() {
