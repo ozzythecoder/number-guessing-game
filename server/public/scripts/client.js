@@ -66,8 +66,8 @@ function storeGuess() {
     console.log('success!');
 
     emptyInputs(); // empty the guess inputs
-    checkForWin();
     render(); // re-render DOM with latest guess in the array
+    checkForWin(); // check if there's a winner
   }).catch( (err) => {
     console.log('whyyyyy 😭');
   }) // end ajax
@@ -81,12 +81,14 @@ function checkForWin() {
   }).then( (response) => {
     let lastGuess = response[response.length - 1];
 
-    if (lastGuess.augustHiLo == 'Correct') {
-      getWinState('August'); // if there was, run the winning function
+    if (lastGuess.augustHiLo == 'Correct' && lastGuess.jaredHiLo == 'Correct') {
+      getTieState();
+    } else if (lastGuess.augustHiLo == 'Correct') {
+      getWinState('August');
     } else if (lastGuess.jaredHiLo == 'Correct') {
       getWinState('Jared');
     } // end else if
-    
+
   }).catch((err) => {
     console.log('argh');
   })
@@ -109,6 +111,20 @@ function getWinState(winner) {
       <button id="play-again">Play Again??</button>
     </div>
   `)
+}
+
+function getTieState() {
+  $('#guess-output').empty();
+
+  //append 'play again?' button (send to server)
+  //(new get function to the server)
+  $('#win-message').append(`
+    <div id="you-won">
+      <h1>It's a tie?!!?!!</h1>
+      <button id="play-again">Play Again??</button>
+    </div>
+  `)
+
 }
 
 function resetGame() {

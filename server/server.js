@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = 5000;
 
+let getRandomInteger = require('./modules/randomNum');
 // This must be added before GET & POST routes.
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -10,9 +11,9 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static('server/public'));
 
 // function to get random number
-function getRandomInteger(min, max) {
-  return Math.floor(Math.random() * (1 + max - min) + min);
-}
+// function getRandomInteger(min, max) {
+//   return Math.floor(Math.random() * (1 + max - min) + min);
+// }
 
 // Game set-up
 let guessArray = []; // will hold all previous guesses
