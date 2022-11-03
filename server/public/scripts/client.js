@@ -8,7 +8,7 @@ function handleReady() {
 
   // need to target element that exists on page load:
   // (in win-message, on click of play-again, run resetGame)
-  $('#win-message').on('click', '#play-again', resetGame);
+  // $('#win-message').on('click', '#play-again', resetGame);
   render();
 }
 
@@ -35,7 +35,6 @@ function freezeInputs(freeze) { // accepts a boolean
   $('#max-value').prop('disabled', freeze)
   $('#start-game').prop('disabled', freeze)
 }
-
 
 function render() {
   console.log('in render()');
@@ -134,36 +133,37 @@ function getWinState(winner) {
   $('#win-message').append(`
     <div id="you-won">
       <h1>Congratulations, ${winner}!!</h1>
-      <button id="play-again">Play Again??</button>
+      <p>Set some new values to play again!</p>
     </div>
   `)
 }
 
 function getTieState() {
   $('#guess-output').empty();
+  freezeInputs(false);
 
   //append 'play again?' button (send to server)
   //(new get function to the server)
   $('#win-message').append(`
     <div id="you-won">
       <h1>It's a tie?!!?!!</h1>
-      <button id="play-again">Play Again??</button>
+      <p>I hate ties!! Set some new values and settle this!</p>
     </div>
   `)
 
 }
 
-function resetGame() {
+// function resetGame() {
 
-  $.ajax({
-    method: 'POST',
-    url: '/reset',
-    data: { reset: true } // idk man, we gotta send something right?
-  }).then( (res) => {
-    $('#win-message').empty(); // delete the win message
-    render(); // should render empty array and allow new guesses  
-  }).catch( (err) => {
-    alert('epic fail 😈');
-  })
+//   $.ajax({
+//     method: 'POST',
+//     url: '/reset',
+//     data: { reset: true } // idk man, we gotta send something right?
+//   }).then( (res) => {
+//     $('#win-message').empty(); // delete the win message
+//     render(); // should render empty array and allow new guesses  
+//   }).catch( (err) => {
+//     alert('epic fail 😈');
+//   })
 
-}
+// }

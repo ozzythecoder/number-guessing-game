@@ -72,16 +72,16 @@ app.post('/guesses', (req, res) => {
   res.sendStatus(200);
 })
 
-app.post('/reset', (req, res) => {
+// app.post('/reset', (req, res) => {
 
-  // wipe array of guesses
-  guessArray = [];
+//   // wipe array of guesses
+//   guessArray = [];
 
-  // generate new number
-  theNumber = getRandomInteger(1, 25);
+//   // generate new number
+//   theNumber = getRandomInteger(1, 25);
 
-  res.sendStatus(200);
-})
+//   res.sendStatus(200);
+// })
 
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
