@@ -30,6 +30,9 @@ app.post('/gameinit', (req, res) => {
   theNumber = getRandomInteger(Number(minMax.min), Number(minMax.max));
   console.log('number chosen:', theNumber);
 
+  // clear old guesses
+  guessArray = [];
+
   res.sendStatus(200);
 })
 

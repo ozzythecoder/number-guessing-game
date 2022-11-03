@@ -24,6 +24,8 @@ function gameInit() {
     }
   }).then( (res) => {
     console.log('game init successful!');
+    $('#win-message').empty();
+    render();
     freezeInputs(true);
   }).catch( (err) => {
     console.log('arf');
