@@ -8,7 +8,16 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 // Serve up static files (HTML, CSS, Client JS)
 app.use(express.static('server/public'));
-const guessArray = ['some stuff'];
+const guessArray = [{
+    numGuessed: 5,
+    name: 'August',
+    hiLo: 'high' },
+  {
+    numGuessed: 9,
+    name: 'Jared',
+    hiLo: 'high'
+  }
+];
 
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (1 + max - min) + min);
