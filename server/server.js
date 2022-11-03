@@ -8,20 +8,14 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 // Serve up static files (HTML, CSS, Client JS)
 app.use(express.static('server/public'));
-const guessArray = [{
-  augustGuess: 9,
-  augustHiLo: null,
-  jaredGuess: 12,
-  jaredHiLo: null
-}
-];
 
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (1 + max - min) + min);
 }
 
+// Game set-up
+let guessArray = [];
 let theNumber = getRandomInteger(1, 25);
-console.log('The number is:', theNumber);
 
 // GET & POST Routes go here
 app.get('/guesses', (req, res) => {
@@ -52,6 +46,19 @@ app.post('/guesses', (req, res) => {
 
   guessArray.push(guessObj);
   console.log('the latest guesses are:', guessObj);
+
+  res.sendStatus(200);
+})
+
+app.post('/reset', (req, res) => {
+  console.log('in reset route');
+
+  // wipe array of guesses
+  guessArray = [];
+  console.log('should be empty:', guessArray);
+
+  // generate new number
+  theNumber = getRandomInteger(1, 25);
 
   res.sendStatus(200);
 })

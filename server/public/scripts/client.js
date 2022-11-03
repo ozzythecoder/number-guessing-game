@@ -3,6 +3,7 @@ $(document).ready(handleReady);
 function handleReady() {
   console.log("jquery is loaded!")
   $('#submit-btn').on('click', storeGuess);
+  $('#win-message').on('click', '#play-again', resetGame);
   render();
 }
 
@@ -72,23 +73,27 @@ function emptyInputs() {
   $('#jared-guess').val('');
 }
 
-function getWinState() {
+function getWinState(winner) {
   //announce the winner
   $('#guess-output').empty();
 
   //append 'play again?' button (send to server)
   //(new get function to the server)
   $('#win-message').append(`
+    <h1>Congratulations, ${winner}!!</h1>
     <button id="play-again">Play Again??</button>
-  
   `)
-  
-  
-
 }
 
-//clear the table data/DOM
-//wipe previous guesses(empty contents of guessArray), 
-//generate new theNumber
-//invoke the render function
-//resetGame function
+function resetGame() {
+  $.ajax({
+    method: 'POST',
+    url: '/reset',
+    data: { reset: true }
+  }).then( (res) => {
+    $('#win-message').empty();
+    render(); // should render empty array and allow new guesses  
+  }).catch( (err) => {
+    alert('epic fail 😈');
+  })
+}
