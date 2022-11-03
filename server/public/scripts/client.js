@@ -3,6 +3,9 @@ $(document).ready(handleReady);
 function handleReady() {
   console.log("jquery is loaded!")
   $('#submit-btn').on('click', storeGuess);
+
+  // need to target element that exists on page load:
+  // (in win-message, on click of play-again, run resetGame)
   $('#win-message').on('click', '#play-again', resetGame);
   render();
 }
@@ -15,10 +18,11 @@ function render() {
     method: 'GET',
     url: '/guesses'
   }).then( (response) => {
-    $('#guess-output').empty();
+    $('#guess-output').empty(); // empties table
 
-    for (let guesses of response) {
-
+    for (let guesses of response) { // receives guess array from server
+      
+      // appends contents of each object in "response" to the DOM
       $('#guess-output').append(`
         <tr>
           <td>${guesses.augustGuess}</td>
@@ -32,16 +36,16 @@ function render() {
         </tr>
       `) // end append
 
+      // during each loop, read if there was a correct guess:
       if (guesses.augustHiLo == 'Correct') {
-        getWinState('August');
-        break;
+        getWinState('August'); // if there was, run the winning function
+        break; // and then immediately exit the for loop
       } else if (guesses.jaredHiLo == 'Correct') {
         getWinState('Jared');
         break;
       }
     } // end for loop
 
-    console.log('we got it!', response);
   }).catch( (err) => {
     console.log('shit!');
   }) // end ajax
@@ -60,8 +64,9 @@ function storeGuess() {
     }
   }).then( (res) => {
     console.log('success!');
-    emptyInputs();
-    render();
+
+    emptyInputs(); // empty the guess inputs
+    render(); // re-render DOM with latest guess in the array
   }).catch( (err) => {
     console.log('whyyyyy 😭');
   }) // end ajax
@@ -91,9 +96,9 @@ function resetGame() {
   $.ajax({
     method: 'POST',
     url: '/reset',
-    data: { reset: true }
+    data: { reset: true } // idk man, we gotta send something right?
   }).then( (res) => {
-    $('#win-message').empty();
+    $('#win-message').empty(); // delete the win message
     render(); // should render empty array and allow new guesses  
   }).catch( (err) => {
     alert('epic fail 😈');

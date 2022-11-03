@@ -9,33 +9,38 @@ app.use(bodyParser.urlencoded({extended:true}))
 // Serve up static files (HTML, CSS, Client JS)
 app.use(express.static('server/public'));
 
+// function to get random number
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (1 + max - min) + min);
 }
 
 // Game set-up
-let guessArray = [];
-let theNumber = getRandomInteger(1, 25);
+let guessArray = []; // will hold all previous guesses
+let theNumber = getRandomInteger(1, 25); // gets a random number from 1 to 25
 
-// GET & POST Routes go here
+// First get request:
 app.get('/guesses', (req, res) => {
   console.log('retrieving guesses');
   console.log(guessArray);
-  res.send(guessArray);
+  res.send(guessArray); // sends guess array to ajax in render() function
 })
 
 app.post('/guesses', (req, res) => {
   console.log('posting guesses');
 
+  // assign data from POST request to a variable
   let guessObj = req.body;
+
+  // compare player 1's guesses to the secret number and assign a new property based on comparison
   if (guessObj.augustGuess > theNumber) {
-    guessObj.augustHiLo = 'High'
+    guessObj.augustHiLo = 'High' // this property is being CREATED here
   } else if (guessObj.augustGuess < theNumber) {
     guessObj.augustHiLo = 'Low'
   } else if (guessObj.augustGuess == theNumber) {
     guessObj.augustHiLo = 'Correct'
   }
 
+  // ditto for player 2
   if (guessObj.jaredGuess > theNumber) {
     guessObj.jaredHiLo = 'High'
   } else if (guessObj.jaredGuess < theNumber) {
@@ -44,18 +49,19 @@ app.post('/guesses', (req, res) => {
     guessObj.jaredHiLo = 'Correct'
   }
 
+  // push object to the array of all guesses
   guessArray.push(guessObj);
+
   console.log('the latest guesses are:', guessObj);
 
+  // let ajax know the data was handled successfully
   res.sendStatus(200);
 })
 
 app.post('/reset', (req, res) => {
-  console.log('in reset route');
 
   // wipe array of guesses
   guessArray = [];
-  console.log('should be empty:', guessArray);
 
   // generate new number
   theNumber = getRandomInteger(1, 25);
