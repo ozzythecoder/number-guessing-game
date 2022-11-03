@@ -1,6 +1,56 @@
+body, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin: 20px 0;
+}
+
+h3 {
+  margin: 5px;
+}
+
 #you-won {
   background-color: deeppink;
   margin: 0 auto;
-  text-align: center;
   padding: 15px;
+}
+
+#container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.input-area {
+  text-align: center;
+  margin: 20px;
+}
+
+#game-init-inputs input {
+  width: 50px;
+}
+
+#game-guess-inputs input {
+  width: 100px;
+  height: 2em;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+}
+
+th {
+  width: 200px;
+  background-color: blanchedalmond;
+}
+
+td {
+  border: 1px lightgray solid;
+  text-align: center;
 }

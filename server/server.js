@@ -27,7 +27,8 @@ app.post('/gameinit', (req, res) => {
   console.log('min', minMax.min, 'max', minMax.max);
 
   // set new secret number from specified values
-  theNumber = getRandomInteger(minMax.min, minMax.max);
+  theNumber = getRandomInteger(Number(minMax.min), Number(minMax.max));
+  console.log('number chosen:', theNumber);
 
   res.sendStatus(200);
 })
