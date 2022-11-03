@@ -18,9 +18,21 @@ app.use(express.static('server/public'));
 // Game set-up
 let guessArray = []; // will hold all previous guesses
 let theNumber;
-console.log('the number is', theNumber)
 
-// First get request:
+app.post('/gameinit', (req, res) => {
+  
+  // get min & max values sent from ajax
+  let minMax = req.body;
+  
+  console.log('min', minMax.min, 'max', minMax.max);
+
+  // set new secret number from specified values
+  theNumber = getRandomInteger(minMax.min, minMax.max);
+
+  res.sendStatus(200);
+})
+
+// retrieve guesses for render
 app.get('/guesses', (req, res) => {
   console.log('retrieving guesses');
   console.log(guessArray);

@@ -13,6 +13,7 @@ function handleReady() {
 }
 
 function gameInit() {
+
   console.log('in gameinit');
   $.ajax({
     method: 'POST',
@@ -22,11 +23,19 @@ function gameInit() {
       max: $('#max-value').val()
     }
   }).then( (res) => {
-    render();
+    console.log('game init successful!');
+    freezeInputs(true);
   }).catch( (err) => {
-
+    console.log('arf');
   })
 }
+
+function freezeInputs(freeze) { // accepts a boolean
+  $('#min-value').prop('disabled', freeze)
+  $('#max-value').prop('disabled', freeze)
+  $('#start-game').prop('disabled', freeze)
+}
+
 
 function render() {
   console.log('in render()');
@@ -118,6 +127,7 @@ function emptyInputs() {
 function getWinState(winner) {
   //announce the winner
   $('#guess-output').empty();
+  freezeInputs(false);
 
   //append 'play again?' button (send to server)
   //(new get function to the server)
