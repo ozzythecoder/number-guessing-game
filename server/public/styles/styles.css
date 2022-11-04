@@ -5,6 +5,11 @@ body, h1, h2, h3, p {
   text-align: center;
 }
 
+body {
+  background-color: #00e1ff;
+  background-image: url("https://transparenttextures.com/patterns/crossword.png");
+}
+
 h1 {
   margin: 20px 0;
 }
@@ -13,15 +18,36 @@ h3 {
   margin: 5px;
 }
 
+button {
+  background-color: blanchedalmond;
+  filter: drop-shadow(3px 3px 3px rgb(0, 0, 0, 0.1));
+  border: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+button:active {
+  background-color: black;
+  color: white;
+  filter: none;
+}
+
 #you-won {
-  background-color: deeppink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff1493;
+  background-image: url("https://transparenttextures.com/patterns/cartographer.png");
   margin: 0 auto;
-  padding: 15px;
+  width: 600px;
+  height: 300px;
+  color: rgb(255, 242, 223);
+}
+
+#you-won h1 {
+  margin-top: 0;
 }
 
 #container {
   margin: 0 auto;
-  width: 80%;
 }
 
 .input-area {
@@ -47,10 +73,13 @@ table {
 
 th {
   width: 200px;
+  height: 2em;
   background-color: blanchedalmond;
 }
 
 td {
-  border: 1px lightgray solid;
+  border: 1px rgb(55, 55, 55) solid;
+  height: 1.5em;
   text-align: center;
+  background-color:rgb(255, 235, 205, 0.3)
 }

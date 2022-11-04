@@ -134,8 +134,10 @@ function getWinState(winner) {
   //(new get function to the server)
   $('#win-message').append(`
     <div id="you-won">
+    <div>
       <h1>Congratulations, ${winner}!!</h1>
       <p>Set some new values to play again!</p>
+    </div>
     </div>
   `)
 }
@@ -148,8 +150,10 @@ function getTieState() {
   //(new get function to the server)
   $('#win-message').append(`
     <div id="you-won">
+    <div>
       <h1>It's a tie?!!?!!</h1>
       <p>I hate ties!! Set some new values and settle this!</p>
+    </div>
     </div>
   `)
 
